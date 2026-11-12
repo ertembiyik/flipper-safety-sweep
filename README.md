@@ -33,6 +33,8 @@ arm-none-eabi-nm firmware.elf | grep hci_send_req
 
 The lasting fix is for the firmware to use `ACI_HAL_READ_RSSI` itself.
 
+The page takes over the Bluetooth radio while it is open, so the Flipper mobile app disconnects. Bluetooth restarts when you leave the page and the mobile app reconnects on its own.
+
 ## Build
 
 ```bash
