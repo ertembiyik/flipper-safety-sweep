@@ -19,7 +19,6 @@ static const Sensor* const pages[] = {
     &sensor_wifi,
     &sensor_radio,
     &sensor_chip,
-    &sensor_infrared,
 };
 
 typedef struct {

@@ -8,7 +8,7 @@ App(
     fap_category="Tools",
     fap_version="0.1",
     fap_icon="safety_sweep.png",
-    fap_description="Sweep a room for signs of hidden cameras with the built-in radios and IR receiver",
+    fap_description="Sweep a room for signs of hidden cameras with the built-in radios",
     fap_author="ertembiyik",
     fap_weburl="https://github.com/ertembiyik/flipper-safety-sweep",
     targets=["f7"],

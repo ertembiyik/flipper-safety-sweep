@@ -16,4 +16,3 @@ typedef struct {
 extern const Sensor sensor_wifi;
 extern const Sensor sensor_radio;
 extern const Sensor sensor_chip;
-extern const Sensor sensor_infrared;

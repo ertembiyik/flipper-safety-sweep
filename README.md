@@ -2,16 +2,15 @@
 
 A Flipper Zero app for sweeping a hotel room or rental for signs of hidden cameras, using only what is built into the device. No add-on boards.
 
-![Wi-Fi 2.4](app/.catalog/screenshots/1.png) ![Radio](app/.catalog/screenshots/2.png) ![Chip](app/.catalog/screenshots/3.png) ![Infrared](app/.catalog/screenshots/4.png)
+![Wi-Fi 2.4](app/.catalog/screenshots/1.png) ![Radio](app/.catalog/screenshots/2.png) ![Chip](app/.catalog/screenshots/3.png)
 
-One analog dial, four pages. The needle rises as you get closer to a source, a dot holds the recent peak, and it clicks like a Geiger counter. Next to the dial it says in words what the reading means. Sound and vibration follow the Flipper's own volume and stealth settings.
+One analog dial, three pages. The needle rises as you get closer to a source, a dot holds the recent peak, and it clicks like a Geiger counter. Next to the dial it says in words what the reading means. Sound and vibration follow the Flipper's own volume and stealth settings.
 
 | Page | Sensor | Responds to | Status |
 |---|---|---|---|
 | **Wi-Fi 2.4** | Bluetooth radio, 2402–2478 MHz in 4 MHz steps | Anything transmitting on 2.4 GHz: Wi-Fi cameras, but equally phones, laptops and routers | Tested: a channel scan showed a clear rise on the channels of nearby Wi-Fi networks, and the dial reaches 100 next to a router. Firmware 1.5.1 only, see below |
 | **Radio** | CC1101, 300–348 / 387–464 / 779–928 MHz | Analog video senders, wireless microphones, key fobs, and any other transmitter in those bands | Reads live signal levels. Not yet tried against a real video sender |
 | **Chip** | CC1101, narrow sweep at 398–402 / 794–806 / 844–856 MHz | Meant for the radio noise a recording camera's memory leaks. Phones and cell towers use the same frequencies and move it too | Experimental. The idea is from the ESauron paper below, which used lab radio equipment. Not yet tried against a real camera |
-| **Infrared** | IR remote receiver | Infrared pulsed at about 38 kHz, which in practice means remote controls | Does not see ordinary night-vision light, which is steady |
 
 A quiet dial does not prove a room is clean, and a moving needle does not prove a camera. 5 GHz Wi-Fi, wired, cellular and idle cameras are invisible to this hardware. Look for lenses with a torch as well.
 
