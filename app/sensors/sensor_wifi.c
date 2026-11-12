@@ -64,7 +64,6 @@ static const struct {
 static struct {
     HciSendReq hci_send_req;
     Bt* bt;
-    bool was_advertising;
     int8_t rssi[WIFI_POINT_COUNT];
     uint8_t cursor;
 } wifi;
@@ -107,17 +106,17 @@ static const char* sensor_wifi_start(void) {
     if(!wifi.hci_send_req) return "Not set up for this\nfirmware version.\nSee README.";
 
     wifi.bt = furi_record_open(RECORD_BT);
-    // bt_disconnect stops advertising itself, so ask first
-    wifi.was_advertising = furi_hal_bt_is_active();
     bt_disconnect(wifi.bt);
-    furi_hal_bt_stop_advertising();
+    // Test mode on a live Bluetooth stack hard-faults the radio core; the firmware's
+    // own radio tests restart the stack first and restore the profile afterwards
+    furi_hal_bt_reinit();
     memset(wifi.rssi, WIFI_RSSI_UNSET, sizeof(wifi.rssi));
     wifi.cursor = 0;
     return NULL;
 }
 
 static void sensor_wifi_stop(void) {
-    if(wifi.was_advertising) furi_hal_bt_start_advertising();
+    bt_profile_restore_default(wifi.bt);
     furi_record_close(RECORD_BT);
     wifi.bt = NULL;
 }
@@ -130,7 +129,7 @@ static bool sensor_wifi_sample(float* value) {
         while(furi_get_tick() - start < furi_ms_to_ticks(WIFI_DWELL_MS)) {
             int8_t rssi;
             if(wifi_read_rssi(&rssi) && rssi > best) best = rssi;
-            // Back-to-back reads with no pause crash the radio core
+            // The value only changes every ~25 ms, so let other threads run
             furi_delay_ms(2);
         }
         furi_hal_bt_stop_packet_test();
